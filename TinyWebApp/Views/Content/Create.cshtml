@@ -1,0 +1,65 @@
+﻿@model ContentsModel
+@{
+    ViewData["Title"] = "Erka Content";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+<script>
+
+    tinymce.init({
+        selector: "#Content"
+    });
+
+</script>
+@using (Html.BeginForm())
+{
+
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Erka Test</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PostedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PostedOn, "Date")
+            @Html.ValidationMessageFor(model => model.PostedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tags)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Tags)
+            @Html.ValidationMessageFor(model => model.Tags)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Content)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control editorHtml" } })
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+
+        <p>
+            Posted Content : @Html.Raw(ViewBag.HtmlContent)
+        </p>
+
+    </fieldset>
+}
+
